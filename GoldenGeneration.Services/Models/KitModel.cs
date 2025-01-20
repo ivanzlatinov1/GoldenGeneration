@@ -1,16 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GoldenGeneration.Infrastructure.Entities
+namespace GoldenGeneration.Services.Models
 {
-    public class Kit
+    public class KitModel
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(30)]
+        [StringLength(30, MinimumLength = 2)]
         public string PrimaryColor { get; set; }
-        [MaxLength(30)]
+        [StringLength(30, MinimumLength = 2)]
         public string SecondaryColor { get; set; }
         public string BadgeUrl { get; set; }
         public string Sponsor { get; set; }
