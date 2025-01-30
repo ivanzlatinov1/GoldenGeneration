@@ -5,7 +5,7 @@ namespace GoldenGeneration.Services.Mappers
 {
     public static class KitMapper
     {
-        public static KitModel ToModel(this Kit entity)
+        public static KitModel ToModel(this Kit entity, bool firstTime = true)
             => new()
             {
                 Id = entity.Id,
@@ -15,7 +15,7 @@ namespace GoldenGeneration.Services.Mappers
                 Sponsor = entity.Sponsor,
             };
 
-        public static Kit ToEntity(this KitModel model)
+        public static Kit ToEntity(this KitModel model, bool firstTime = true)
             => new()
             {
                 Id = model.Id,

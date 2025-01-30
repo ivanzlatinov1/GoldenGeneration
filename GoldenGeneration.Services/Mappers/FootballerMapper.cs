@@ -5,7 +5,7 @@ namespace GoldenGeneration.Services.Mappers
 {
     public static class FootballerMapper
     {
-        public static FootballerModel ToModel(this Footballer entity)
+        public static FootballerModel ToModel(this Footballer entity, bool firstTime = true)
             => new()
             {
                 Id = entity.Id,
@@ -18,11 +18,11 @@ namespace GoldenGeneration.Services.Mappers
                 ShirtNumber = entity.ShirtNumber,
                 TransferPrice = entity.TransferPrice,
                 Retired = entity.Retired,
-                Position = entity.Position,
-                Club = entity.Club.ToModel()
+                Position = firstTime ? entity.Position.ToModel(false) : null!,
+                Club = firstTime ? entity.Club.ToModel(false) : null!
             };
 
-        public static Footballer ToEntity(this FootballerModel model)
+        public static Footballer ToEntity(this FootballerModel model, bool firstTime = true)
             => new()
             {
                 Id = model.Id,
@@ -35,8 +35,8 @@ namespace GoldenGeneration.Services.Mappers
                 ShirtNumber = model.ShirtNumber,
                 TransferPrice = model.TransferPrice,
                 Retired = model.Retired,
-                Position = model.Position,
-                Club = model.Club.ToEntity()
+                Position = firstTime ? model.Position.ToEntity(false) : null!,
+                Club = firstTime ? model.Club.ToEntity(false) : null!
             };
     }
 }

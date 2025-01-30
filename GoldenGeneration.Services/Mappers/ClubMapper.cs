@@ -1,12 +1,11 @@
 ﻿using GoldenGeneration.Infrastructure.Entities;
-using GoldenGeneration.Infrastructure.Entities.JoinedEntities;
 using GoldenGeneration.Services.Models;
 
 namespace GoldenGeneration.Services.Mappers
 {
     public static class ClubMapper
     {
-        public static ClubModel ToModel(this Club entity)
+        public static ClubModel ToModel(this Club entity, bool firstTime = true)
             => new()
             {
                 Id = entity.Id,
@@ -17,13 +16,13 @@ namespace GoldenGeneration.Services.Mappers
                 ChampionsLeagueTitlesCount = entity.ChampionsLeagueTitlesCount,
                 LeagueWinnerTitlesCount = entity.LeagueWinnerTitlesCount,
                 KitId = entity.KitId,
-                Kit = entity.Kit,
-                Manager = entity.Manager,
-                League = entity.League,
+                Kit = firstTime ? entity.Kit.ToModel(false) : null!,
+                Manager = firstTime ? entity.Manager.ToModel(false) : null!,
+                League = firstTime ? entity.League.ToModel(false) : null!,
                 ManagerClubs = entity.ManagerClubs
             };
 
-        public static Club ToEntity(this ClubModel model)
+        public static Club ToEntity(this ClubModel model, bool firstTime = true)
             => new()
             {
                 Id = model.Id,
@@ -34,9 +33,9 @@ namespace GoldenGeneration.Services.Mappers
                 ChampionsLeagueTitlesCount = model.ChampionsLeagueTitlesCount,
                 LeagueWinnerTitlesCount = model.LeagueWinnerTitlesCount,
                 KitId = model.KitId,
-                Kit = model.Kit,
-                Manager = model.Manager,
-                League = model.League,
+                Kit = firstTime ? model.Kit.ToEntity(false) : null!,
+                Manager = firstTime ? model.Manager.ToEntity(false) : null!,
+                League = firstTime ? model.League.ToEntity(false) : null!,
                 ManagerClubs = model.ManagerClubs
             };
     }

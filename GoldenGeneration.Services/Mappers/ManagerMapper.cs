@@ -5,7 +5,7 @@ namespace GoldenGeneration.Services.Mappers
 {
     public static class ManagerMapper
     {
-        public static ManagerModel ToModel(this Manager entity)
+        public static ManagerModel ToModel(this Manager entity, bool firstTime = true)
             => new()
             {
                 Id = entity.Id,
@@ -16,7 +16,7 @@ namespace GoldenGeneration.Services.Mappers
                 ManagerClubs = entity.ManagerClubs
             };
 
-        public static Manager ToEntity(this ManagerModel model)
+        public static Manager ToEntity(this ManagerModel model, bool firstTime = true)
             => new()
             {
                 Id = model.Id,

@@ -16,9 +16,9 @@ namespace GoldenGeneration.Services.Models
         public int ChampionsLeagueTitlesCount { get; set; }
         public int LeagueWinnerTitlesCount { get; set; }
         public int KitId { get; set; }
-        public Kit Kit { get; set; }
-        public Manager Manager { get; set; }
-        public League League { get; set; }
+        public KitModel Kit { get; set; }
+        public ManagerModel Manager { get; set; }
+        public LeagueModel League { get; set; }
         public ICollection<ManagerClub> ManagerClubs { get; set; } = new List<ManagerClub>();
     }
 }

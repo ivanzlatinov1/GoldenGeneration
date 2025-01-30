@@ -18,7 +18,7 @@ namespace GoldenGeneration.Services.Models
         public int ShirtNumber { get; set; }
         public decimal TransferPrice { get; set; }
         public bool Retired { get; set; }
-        public Position Position { get; set; }
+        public PositionModel Position { get; set; }
         public ClubModel Club { get; set; }
     }
 }
