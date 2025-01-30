@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenGeneration.Infrastruc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenGeneration.Services", "GoldenGeneration.Services\GoldenGeneration.Services.csproj", "{91736F0D-5041-4C38-B7FB-CBEC6078FADA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenGeneration.Web", "GoldenGeneration.Web\GoldenGeneration.Web.csproj", "{01872699-0507-4C75-AAA3-5194F973379E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{91736F0D-5041-4C38-B7FB-CBEC6078FADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91736F0D-5041-4C38-B7FB-CBEC6078FADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91736F0D-5041-4C38-B7FB-CBEC6078FADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01872699-0507-4C75-AAA3-5194F973379E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01872699-0507-4C75-AAA3-5194F973379E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01872699-0507-4C75-AAA3-5194F973379E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01872699-0507-4C75-AAA3-5194F973379E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
