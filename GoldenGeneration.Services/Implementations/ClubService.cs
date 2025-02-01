@@ -11,7 +11,12 @@ namespace GoldenGeneration.Services.Implementations
     {
         public async Task<ClubModel[]> GetAllAsync()
         {
-            Club[] clubs = await context.Clubs.ToArrayAsync();
+            Club[] clubs = await context.Clubs
+                .Include(x => x.Kit)
+                .Include(x => x.Manager)
+                .Include(x => x.League)
+                .ToArrayAsync();
+
             return [.. clubs.Select(x => x.ToModel())];
         }
 
@@ -36,7 +41,11 @@ namespace GoldenGeneration.Services.Implementations
         }
 
         private async Task<Club> GetClubById(string id)
-            => await context.Clubs.FirstOrDefaultAsync(x => x.Id == id)
+            => await context.Clubs
+                   .Include(x => x.Kit)
+                   .Include(x => x.Manager)
+                   .Include(x => x.League)
+                   .FirstOrDefaultAsync(x => x.Id == id)
                ?? throw new KeyNotFoundException($"Club with id: {id} is not found.");
     }
 }

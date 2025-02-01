@@ -11,7 +11,11 @@ namespace GoldenGeneration.Services.Implementations
     {
         public async Task<FootballerModel[]> GetAllAsync()
         {
-            Footballer[] footballers = await context.Footballers.ToArrayAsync();
+            Footballer[] footballers = await context.Footballers
+                .Include(x => x.Position)
+                .Include(x => x.Club)
+                .ToArrayAsync();
+
             return [.. footballers.Select(x => x.ToModel())];
         }
 
@@ -36,7 +40,10 @@ namespace GoldenGeneration.Services.Implementations
         }
 
         private async Task<Footballer> GetFootballerById(string id)
-            => await context.Footballers.FirstOrDefaultAsync(x => x.Id == id)
+            => await context.Footballers
+                   .Include(x => x.Position)
+                   .Include(x => x.Club)
+                   .FirstOrDefaultAsync(x => x.Id == id)
                     ?? throw new KeyNotFoundException($"Footballer with id: {id} is not found.");
     }
 }

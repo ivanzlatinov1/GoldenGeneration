@@ -35,8 +35,8 @@ namespace GoldenGeneration.Services.Mappers
                 ShirtNumber = model.ShirtNumber,
                 TransferPrice = model.TransferPrice,
                 Retired = model.Retired,
-                Position = firstTime ? model.Position.ToEntity(false) : null!,
-                Club = firstTime ? model.Club.ToEntity(false) : null!
+                Position = null!,
+                Club = null!
             };
     }
 }
