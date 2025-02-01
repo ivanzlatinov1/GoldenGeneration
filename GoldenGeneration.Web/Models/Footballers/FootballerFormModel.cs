@@ -2,12 +2,12 @@
 using GoldenGeneration.Services.Models;
 using GoldenGeneration.Web.Models.Clubs;
 using System.ComponentModel.DataAnnotations;
+using GoldenGeneration.Web.Models.Positions;
 
 namespace GoldenGeneration.Web.Models.Footballers
 {
     public class FootballerFormModel
     {
-        public string Id { get; set; }
         [StringLength(60, MinimumLength = 2)]
         public string FirstName { get; set; }
         [StringLength(60, MinimumLength = 2)]
@@ -20,5 +20,7 @@ namespace GoldenGeneration.Web.Models.Footballers
         public int ShirtNumber { get; set; }
         public decimal TransferPrice { get; set; }
         public bool Retired { get; set; }
+        public ClubViewModel[] Clubs { get; set; }
+        public PositionViewModel[] Positions { get; set; }
     }
 }

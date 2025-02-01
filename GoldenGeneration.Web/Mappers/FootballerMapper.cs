@@ -8,7 +8,6 @@ namespace GoldenGeneration.Web.Mappers
         public static FootballerModel ToModel(this FootballerFormModel form, bool firstTime = true)
             => new()
             {
-                Id = form.Id,
                 FirstName = form.FirstName,
                 LastName = form.LastName,
                 Age = form.Age,

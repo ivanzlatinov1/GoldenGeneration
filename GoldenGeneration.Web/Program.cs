@@ -1,4 +1,6 @@
 using GoldenGeneration.Infrastructure;
+using GoldenGeneration.Services.Implementations;
+using GoldenGeneration.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +15,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<GoldenGenerationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IFootballerService, FootballerService>();
+builder.Services.AddScoped<IClubService, ClubService>();
+builder.Services.AddScoped<IKitService, KitService>();
+builder.Services.AddScoped<ILeagueService, LeagueService>();
+builder.Services.AddScoped<IManagerService, ManagerService>();
+builder.Services.AddScoped<IPositionService, PositionService>();
 
 var app = builder.Build();
 

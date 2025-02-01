@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GoldenGeneration.Web.Controllers
 {
-    public class FootballerController(IFootballerService service): Controller
+    public class FootballerController(IFootballerService service, IClubService clubService,
+    IPositionService positionService): Controller
     {
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -22,9 +23,15 @@ namespace GoldenGeneration.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            FootballerFormModel form = new();
+            var clubs = await clubService.GetAllAsync();
+            var positions = await positionService.GetAllAsync();
+            FootballerFormModel form = new()
+            {
+                Clubs = clubs.Select(x => x.ToView()).ToArray(),
+                Positions = positions.Select(x => x.ToView()).ToArray()
+            };
             return View(form);
         }
 
@@ -39,6 +46,12 @@ namespace GoldenGeneration.Web.Controllers
             }
             catch
             {
+                var clubs = await clubService.GetAllAsync();
+                var positions = await positionService.GetAllAsync();
+
+                form.Clubs = clubs.Select(x => x.ToView()).ToArray();
+                form.Positions = positions.Select(x => x.ToView()).ToArray();
+
                 return View(form);
             }
         }
