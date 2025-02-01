@@ -19,21 +19,26 @@ namespace GoldenGeneration.Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Manager>()
+                .Property(m => m.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Club>()
+                .Property(m => m.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Footballer>()
+                .Property(m => m.Id)
+                .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<ManagerClub>()
                 .HasKey(mc => new { mc.ManagerId, mc.ClubId });
 
             modelBuilder.Entity<ManagerClub>()
-                .Property(mc => mc.ManagerId)
-                .HasMaxLength(50);
-
-            modelBuilder.Entity<ManagerClub>()
-                .Property(mc => mc.ClubId)
-                .HasMaxLength(50);
-
-            modelBuilder.Entity<ManagerClub>()
                 .HasOne(mc => mc.Manager)
                 .WithMany(m => m.ManagerClubs)
-                .HasForeignKey(mc => mc.ManagerId);
+                .HasForeignKey(mc => mc.ManagerId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ManagerClub>()
                 .HasOne(mc => mc.Club)

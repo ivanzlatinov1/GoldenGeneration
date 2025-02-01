@@ -17,7 +17,7 @@ namespace GoldenGeneration.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -61,7 +61,7 @@ namespace GoldenGeneration.Infrastructure.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("Clubs");
+                    b.ToTable("Clubs", (string)null);
                 });
 
             modelBuilder.Entity("GoldenGeneration.Infrastructure.Entities.Footballer", b =>
@@ -109,24 +109,22 @@ namespace GoldenGeneration.Infrastructure.Migrations
 
                     b.HasIndex("PositionId");
 
-                    b.ToTable("Footballers");
+                    b.ToTable("Footballers", (string)null);
                 });
 
             modelBuilder.Entity("GoldenGeneration.Infrastructure.Entities.JoinedEntities.ManagerClub", b =>
                 {
                     b.Property<string>("ManagerId")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ClubId")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ManagerId", "ClubId");
 
                     b.HasIndex("ClubId");
 
-                    b.ToTable("ManagersClubs");
+                    b.ToTable("ManagersClubs", (string)null);
                 });
 
             modelBuilder.Entity("GoldenGeneration.Infrastructure.Entities.Kit", b =>
@@ -157,7 +155,7 @@ namespace GoldenGeneration.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Kits");
+                    b.ToTable("Kits", (string)null);
                 });
 
             modelBuilder.Entity("GoldenGeneration.Infrastructure.Entities.League", b =>
@@ -175,7 +173,7 @@ namespace GoldenGeneration.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("League");
+                    b.ToTable("League", (string)null);
                 });
 
             modelBuilder.Entity("GoldenGeneration.Infrastructure.Entities.Manager", b =>
@@ -203,7 +201,7 @@ namespace GoldenGeneration.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Managers");
+                    b.ToTable("Managers", (string)null);
                 });
 
             modelBuilder.Entity("GoldenGeneration.Infrastructure.Entities.Position", b =>
@@ -226,7 +224,7 @@ namespace GoldenGeneration.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Positions");
+                    b.ToTable("Positions", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -374,10 +372,12 @@ namespace GoldenGeneration.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -414,10 +414,12 @@ namespace GoldenGeneration.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -484,7 +486,7 @@ namespace GoldenGeneration.Infrastructure.Migrations
                     b.HasOne("GoldenGeneration.Infrastructure.Entities.Manager", "Manager")
                         .WithMany("ManagerClubs")
                         .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Club");
