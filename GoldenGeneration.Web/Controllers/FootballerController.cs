@@ -9,17 +9,23 @@ namespace GoldenGeneration.Web.Controllers
     IPositionService positionService): Controller
     {
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View();
+            var pageSize = 9;
+            var footballers = await service.GetAllAsync();
+
+            var pagedFootballers = footballers
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(x => x.ToView())
+                .ToArray();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)footballers.Count() / pageSize);
+
+            return View(pagedFootballers);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Navigation()
-        {
-            var footballers = await service.GetAllAsync();
-            return View(footballers.Select(x => x.ToView()).ToArray());
-        }
 
         [HttpGet]
         public async Task<IActionResult> Details(string id)

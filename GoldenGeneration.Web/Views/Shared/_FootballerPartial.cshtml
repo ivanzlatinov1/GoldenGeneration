@@ -3,5 +3,8 @@
     <div class="text-center">
         <h3>@Model.FirstName</h3>
         <h3>@Model.LastName</h3>
+        <a asp-controller="Footballer" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">
+            Details
+        </a>
     </div>
 </section>
