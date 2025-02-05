@@ -9,7 +9,13 @@ namespace GoldenGeneration.Web.Controllers
     IPositionService positionService): Controller
     {
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Navigation()
         {
             var footballers = await service.GetAllAsync();
             return View(footballers.Select(x => x.ToView()).ToArray());

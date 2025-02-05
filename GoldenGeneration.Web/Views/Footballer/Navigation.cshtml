@@ -1,0 +1,10 @@
+﻿@model GoldenGeneration.Web.Models.Footballers.FootballerViewModel[]
+<div class="p-3 text-center">
+    <a asp-controller="Footballer" asp-action="Create" class="btn btn-primary">Create Footballer</a>
+</div>
+<div class="box">
+    @foreach (var footballer in Model)
+    {
+        <partial name="_FootballerPartial" model="footballer"/>
+    }
+</div>
