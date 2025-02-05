@@ -11,6 +11,8 @@ namespace GoldenGeneration.Infrastructure.Entities
         [Required]
         [MaxLength(60)]
         public string Name { get; set; }
+        [Required]
+        public string ImageUrl { get; set; }
         public int LeagueId { get; set; }
         public string ManagerId { get; set; }
         [MaxLength(70)]

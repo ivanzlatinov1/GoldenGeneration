@@ -18,6 +18,7 @@ namespace GoldenGeneration.Web.Models.Footballers
         public int PositionId { get; set; }
         public string ClubId { get; set; }
         public int ShirtNumber { get; set; }
+        public string ImageUrl { get; set; }
         public decimal TransferPrice { get; set; }
         public bool Retired { get; set; }
         public ClubViewModel[] Clubs { get; set; }

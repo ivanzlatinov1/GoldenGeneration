@@ -15,6 +15,7 @@ namespace GoldenGeneration.Services.Models
         public string Nationality { get; set; }
         public int PositionId { get; set; }
         public string ClubId { get; set; }
+        public string ImageUrl { get; set; }
         public int ShirtNumber { get; set; }
         public decimal TransferPrice { get; set; }
         public bool Retired { get; set; }

@@ -9,6 +9,7 @@ namespace GoldenGeneration.Web.Models.Clubs
         public string Id { get; set; }
         [StringLength(60, MinimumLength = 2)]
         public string Name { get; set; }
+        public string ImageUrl { get; set; }
         public int LeagueId { get; set; }
         public string ManagerId { get; set; }
         [StringLength(70, MinimumLength = 2)]

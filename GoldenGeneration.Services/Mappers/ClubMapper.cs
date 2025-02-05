@@ -10,6 +10,7 @@ namespace GoldenGeneration.Services.Mappers
             {
                 Id = entity.Id,
                 Name = entity.Name,
+                ImageUrl = entity.ImageUrl,
                 LeagueId = entity.LeagueId,
                 ManagerId = entity.ManagerId,
                 Stadium = entity.Stadium,
@@ -27,6 +28,7 @@ namespace GoldenGeneration.Services.Mappers
             {
                 Id = model.Id,
                 Name = model.Name,
+                ImageUrl = model.ImageUrl,
                 LeagueId = model.LeagueId,
                 ManagerId = model.ManagerId,
                 Stadium = model.Stadium,

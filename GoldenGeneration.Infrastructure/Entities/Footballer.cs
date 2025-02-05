@@ -17,6 +17,8 @@ namespace GoldenGeneration.Infrastructure.Entities
         public int PositionId { get; set; }
         public string ClubId { get; set; }
         public int ShirtNumber { get; set; }
+        [Required]
+        public string ImageUrl { get; set; }
         public decimal TransferPrice { get; set; }
         public bool Retired { get; set; }
 
