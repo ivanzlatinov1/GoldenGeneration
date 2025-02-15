@@ -5,9 +5,14 @@
 <section class="main">
     <h1 class="shadow-lg p-3 mb-3 text-white rounded shadow-text">Golden Generation</h1>
     <h2 class="shadow p-3 text-light rounded shadow-text">Be part of the world's football</h2>
-    <a asp-controller="Footballer" asp-action="Index" class="btn btn-primary btn-modern">
-        <span>Start Exploring</span>
-    </a>
+    <div class="buttons">
+        <a asp-controller="Footballer" asp-action="Index" class="btn btn-primary btn-modern">
+            <span>Explore Footballers</span>
+        </a>
+        <a asp-controller="Club" asp-action="Index" class="btn btn-primary btn-modern">
+            <span>Explore Clubs</span>
+        </a>
+    </div>
 </section>
 
 <div class="polygon">
@@ -15,6 +20,11 @@
 </div>
 
 <style>
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
         .btn-modern {
             position: relative;
             overflow: hidden;

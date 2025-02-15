@@ -1,6 +1,9 @@
 ﻿using GoldenGeneration.Infrastructure.Entities;
 using GoldenGeneration.Infrastructure.Entities.JoinedEntities;
 using System.ComponentModel.DataAnnotations;
+using GoldenGeneration.Web.Models.Kits;
+using GoldenGeneration.Web.Models.Leagues;
+using GoldenGeneration.Web.Models.Managers;
 
 namespace GoldenGeneration.Web.Models.Clubs
 {
@@ -17,5 +20,8 @@ namespace GoldenGeneration.Web.Models.Clubs
         public int ChampionsLeagueTitlesCount { get; set; }
         public int LeagueWinnerTitlesCount { get; set; }
         public int KitId { get; set; }
+        public LeagueViewModel[] Leagues { get; set; }
+        public ManagerViewModel[] Managers { get; set; }
+        public KitViewModel[] Kits { get; set; }
     }
 }

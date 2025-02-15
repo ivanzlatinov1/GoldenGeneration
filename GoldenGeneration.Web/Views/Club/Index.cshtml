@@ -1,0 +1,38 @@
+﻿@model GoldenGeneration.Web.Models.Clubs.ClubViewModel[]
+
+@{
+    int currentPage = ViewBag.CurrentPage;
+    int totalPages = ViewBag.TotalPages;
+}
+
+<div class="text-center mt-2">
+    <a class="btn btn-primary" asp-action="Create">Create Club</a>
+</div>
+
+<div class="box">
+    @foreach (var club in Model)
+    {
+        <partial name="_ClubPartial" model="club" />
+    }
+</div>
+
+<div class="pagination">
+    @if (currentPage > 1)
+    {
+        <a asp-action="Index" asp-route-page="@(currentPage - 1)">Previous</a>
+    }
+    else
+    {
+        <span class="disabled">Previous</span>
+    }
+    <span>Page @currentPage of @totalPages</span>
+
+    @if (currentPage < totalPages)
+    {
+        <a asp-action="Index" asp-route-page="@(currentPage + 1)">Next</a>
+    }
+    else
+    {
+        <span class="disabled">Next</span>
+    }
+</div>

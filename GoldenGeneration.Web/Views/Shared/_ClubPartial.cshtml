@@ -1,0 +1,29 @@
+﻿@model GoldenGeneration.Web.Models.Clubs.ClubViewModel
+
+<style>
+    .club .banner {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        z-index: 10;
+    }
+
+    .club .info {
+        position: relative;
+        z-index: 50;
+    }
+</style>
+
+<section class="club" style="position: relative; background-image: url('@Model.ImageUrl'); background-size: cover; background-position: center; color: white;">
+    <div class="text-center info">
+        <h3>@Model.Name</h3>
+        <h3>@Model.League.Name</h3>
+        <a asp-controller="Club" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">
+            View Details
+        </a>
+    </div>
+    <div class="banner"></div>
+</section>

@@ -55,6 +55,11 @@ body {
     background-color: hsl(228, 21%, 14%);
 }
 
+.page {
+    overflow-y: scroll;
+    height: 90vh;
+}
+
 .hero {
     width: 50%;
     height: 80%;
@@ -79,7 +84,11 @@ body {
     gap: 40px;
 }
 
-.footballer {
+    .box section {
+        border-radius: 10px;
+    }
+
+.footballer, .club {
     width: 30%;
     padding: 20px;
     background-color: black;
