@@ -1,7 +1,10 @@
 ﻿using GoldenGeneration.Services.Interfaces;
 using GoldenGeneration.Web.Mappers;
 using GoldenGeneration.Web.Models.Managers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static GoldenGeneration.Infrastructure.Constants;
 
 namespace GoldenGeneration.Web.Controllers
 {
@@ -21,6 +24,7 @@ namespace GoldenGeneration.Web.Controllers
             return View(manager.ToView());
         }
 
+        [Authorize(Admin)]
         [HttpGet]
         public IActionResult Create()
         {
@@ -28,6 +32,7 @@ namespace GoldenGeneration.Web.Controllers
             return View(form);
         }
 
+        [Authorize(Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ManagerFormModel form)
@@ -43,6 +48,7 @@ namespace GoldenGeneration.Web.Controllers
             }
         }
 
+        [Authorize(Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)

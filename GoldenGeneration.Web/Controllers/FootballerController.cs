@@ -1,7 +1,10 @@
 ﻿using GoldenGeneration.Services.Interfaces;
 using GoldenGeneration.Web.Mappers;
 using GoldenGeneration.Web.Models.Footballers;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static GoldenGeneration.Infrastructure.Constants;
 
 namespace GoldenGeneration.Web.Controllers
 {
@@ -34,6 +37,7 @@ namespace GoldenGeneration.Web.Controllers
             return View(footballer.ToView());
         }
 
+        [Authorize(Admin)]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -47,6 +51,7 @@ namespace GoldenGeneration.Web.Controllers
             return View(form);
         }
 
+        [Authorize(Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(FootballerFormModel form)
@@ -68,6 +73,7 @@ namespace GoldenGeneration.Web.Controllers
             }
         }
 
+        [Authorize(Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)

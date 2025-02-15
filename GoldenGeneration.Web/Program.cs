@@ -1,8 +1,10 @@
 using GoldenGeneration.Infrastructure;
 using GoldenGeneration.Services.Implementations;
 using GoldenGeneration.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using static GoldenGeneration.Infrastructure.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +14,21 @@ builder.Services.AddDbContext<GoldenGenerationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<GoldenGenerationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication();
+
+builder.Services.AddAuthorization(options =>
+{
+    string[] roles = [Admin];
+    foreach (var role in roles)
+    {
+        options.AddPolicy(role, policy => policy.RequireRole(role));
+    }
+});
 
 builder.Services.AddScoped<IFootballerService, FootballerService>();
 builder.Services.AddScoped<IClubService, ClubService>();
@@ -42,11 +56,15 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 app.MapRazorPages();
 
 app.Run();

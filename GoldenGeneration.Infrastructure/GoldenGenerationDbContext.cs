@@ -1,7 +1,9 @@
 ﻿using GoldenGeneration.Infrastructure.Entities;
 using GoldenGeneration.Infrastructure.Entities.JoinedEntities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using static GoldenGeneration.Infrastructure.Constants;
 
 namespace GoldenGeneration.Infrastructure
 {
@@ -44,6 +46,16 @@ namespace GoldenGeneration.Infrastructure
                 .HasOne(mc => mc.Club)
                 .WithMany(c => c.ManagerClubs)
                 .HasForeignKey(mc => mc.ClubId);
+
+            modelBuilder.Entity<IdentityRole>()
+                .HasData([
+                    new(Admin)
+                    {
+                        NormalizedName = Admin.ToUpperInvariant(),
+                        Id = new("fad1b19d-5333-4633-bd84-d67c64649f65"),
+                        ConcurrencyStamp = "42174679-32f1-48b0-9524-0f00791ec760",
+                    }
+            ]);
         }
     }
 }
