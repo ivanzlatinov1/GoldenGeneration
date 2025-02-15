@@ -1,10 +1,28 @@
 ﻿@model GoldenGeneration.Web.Models.Footballers.FootballerViewModel
-<section class="footballer">
-    <div class="text-center">
+
+<style>
+    .footballer .banner {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 10;
+    }
+
+    .footballer .info {
+        position: relative;
+        z-index: 50;
+    }
+</style>
+
+<section class="footballer" style="position: relative; background-image: url('@Model.ImageUrl'); background-size: cover; background-position: top; color: white;">
+    <div class="text-center info">
         <h3>@Model.FirstName</h3>
         <h3>@Model.LastName</h3>
         <a asp-controller="Footballer" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary">
-            Details
+            View Details
         </a>
     </div>
+    <div class="banner"></div>
 </section>

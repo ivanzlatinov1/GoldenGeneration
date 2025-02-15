@@ -21,7 +21,7 @@ body {
     height: 100vh;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, sans-serif;
     background-color: white;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .container {
@@ -83,6 +83,7 @@ body {
     width: 30%;
     padding: 20px;
     background-color: black;
+    border-radius: 10px;
 }
 
 .shadow-text {
@@ -96,32 +97,32 @@ body {
     margin-top: 10px;
 }
 
-    .pagination a {
-        padding: 10px 15px;
-        margin: 0 5px;
-        font-size: 16px;
-        text-decoration: none;
-        color: white;
-        background-color: #007bff;
-        border-radius: 5px;
-        transition: background-color 0.3s, transform 0.2s;
-    }
+.pagination a {
+    padding: 10px 15px;
+    margin: 0 5px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
 
-        .pagination a:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
+.pagination a:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
 
-    .pagination .disabled {
-           visibility: hidden;
-    }
+.pagination .disabled {
+    visibility: hidden;
+}
 
-    .pagination .active {
-        background-color: #28a745;
-        font-weight: bold;
-    }
+.pagination .active {
+    background-color: #28a745;
+    font-weight: bold;
+}
 
-    .pagination span {
-        font-size: 16px;
-        margin: 0 10px;
-    }
+.pagination span {
+    font-size: 16px;
+    margin: 0 10px;
+}

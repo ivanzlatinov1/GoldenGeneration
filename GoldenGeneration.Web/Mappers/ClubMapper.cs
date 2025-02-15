@@ -15,6 +15,7 @@ namespace GoldenGeneration.Web.Mappers
                 Stadium = form.Stadium,
                 ChampionsLeagueTitlesCount = form.ChampionsLeagueTitlesCount,
                 LeagueWinnerTitlesCount = form.LeagueWinnerTitlesCount,
+                ImageUrl = form.ImageUrl,
                 KitId = form.KitId
             };
 
@@ -32,6 +33,7 @@ namespace GoldenGeneration.Web.Mappers
                 Kit = firstTime ? model.Kit.ToView(false) : null!,
                 Manager = firstTime ? model.Manager.ToView(false) : null!,
                 League = firstTime ? model.League.ToView(false) : null!,
+                ImageUrl = model.ImageUrl,
                 ManagerClubs = model.ManagerClubs
             };
     }

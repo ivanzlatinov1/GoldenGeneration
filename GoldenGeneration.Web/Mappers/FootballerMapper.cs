@@ -16,6 +16,7 @@ namespace GoldenGeneration.Web.Mappers
                 ClubId = form.ClubId,
                 ShirtNumber = form.ShirtNumber,
                 TransferPrice = form.TransferPrice,
+                ImageUrl = form.ImageUrl,
                 Retired = form.Retired,
             };
 
@@ -32,6 +33,7 @@ namespace GoldenGeneration.Web.Mappers
                 ShirtNumber = model.ShirtNumber,
                 TransferPrice = model.TransferPrice,
                 Retired = model.Retired,
+                ImageUrl = model.ImageUrl,
                 Position = firstTime ? model.Position.ToView(false) : null!,
                 Club = firstTime ? model.Club.ToView(false) : null!
             };

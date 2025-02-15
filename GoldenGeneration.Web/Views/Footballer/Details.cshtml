@@ -1,0 +1,98 @@
+﻿@model GoldenGeneration.Web.Models.Footballers.FootballerViewModel
+
+<style>
+    .details {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #3332;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .details h1 {
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+    }
+
+    .detail {
+        margin-left: 50px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+        .detail strong {
+            color: #555;
+        }
+
+    .image-container {
+        position: absolute;
+        text-align: center;
+        top: 25%;
+        right: 15%;
+    }
+
+        .image-container img {
+            border-radius: 50%;
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border: 4px solid #ddd;
+        }
+
+    .detail-container {
+        margin-bottom: 20px;
+    }
+</style>
+
+
+
+<div class="details">
+    <h1>Footballer Details</h1>
+
+    <div class="detail-container">
+        <div class="detail">
+            <strong>First Name:</strong> @Model.FirstName
+        </div>
+
+        <div class="detail">
+            <strong>Last Name:</strong> @Model.LastName
+        </div>
+
+        <div class="detail">
+            <strong>Age:</strong> @Model.Age
+        </div>
+
+        <div class="detail">
+            <strong>Nationality:</strong> @Model.Nationality
+        </div>
+
+        <div class="detail">
+            <strong>Position:</strong> @Model.Position.Name
+        </div>
+
+        <div class="detail">
+            <strong>Club:</strong> @Model.Club.Name
+        </div>
+
+        <div class="detail">
+            <strong>Shirt Number:</strong> @Model.ShirtNumber
+        </div>
+
+        <div class="detail">
+            <strong>Transfer Price:</strong> @Model.TransferPrice.ToString("C")
+        </div>
+
+        <div class="detail">
+            <strong>Retired:</strong> @(Model.Retired ? "Yes" : "No")
+        </div>
+    </div>
+
+    <div class="image-container">
+        <img src="@Model.ImageUrl" alt="@Model.FirstName @Model.LastName" />
+    </div>
+</div>
