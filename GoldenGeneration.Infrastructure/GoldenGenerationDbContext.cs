@@ -7,8 +7,16 @@ using static GoldenGeneration.Infrastructure.Constants;
 
 namespace GoldenGeneration.Infrastructure
 {
-    public class GoldenGenerationDbContext(DbContextOptions<GoldenGenerationDbContext> opt) : IdentityDbContext(opt)
+    public class GoldenGenerationDbContext : IdentityDbContext
     {
+        public GoldenGenerationDbContext()
+        {
+            
+        }
+        public GoldenGenerationDbContext(DbContextOptions<GoldenGenerationDbContext> opt)
+            : base(opt)
+        {
+        }
         public required DbSet<Position> Positions { get; set; }
         public required DbSet<Footballer> Footballers { get; set; }
         public required DbSet<Kit> Kits { get; set; }

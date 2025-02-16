@@ -1,4 +1,6 @@
 using GoldenGeneration.Infrastructure;
+using GoldenGeneration.Infrastructure.Repositories;
+using GoldenGeneration.Infrastructure.Repositories.Readers;
 using GoldenGeneration.Services.Implementations;
 using GoldenGeneration.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -30,6 +32,14 @@ builder.Services.AddAuthorization(options =>
     }
 });
 
+builder.Services.AddScoped<FootballerReads>();
+builder.Services.AddScoped<ClubReads>();
+builder.Services.AddScoped<ManagerReads>();
+builder.Services.AddScoped<KitReads>();
+builder.Services.AddScoped<LeagueReads>();
+builder.Services.AddScoped<PositionReads>();
+builder.Services.AddScoped(typeof(Writes<>));
+builder.Services.AddScoped<UnitOfWork>();
 builder.Services.AddScoped<IFootballerService, FootballerService>();
 builder.Services.AddScoped<IClubService, ClubService>();
 builder.Services.AddScoped<IKitService, KitService>();
