@@ -135,3 +135,83 @@ body {
     font-size: 16px;
     margin: 0 10px;
 }
+
+h2 {
+    text-align: center;
+    color: #f5f5f5;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.dream-team-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-image: url('/squad.png');
+    background-position: bottom;
+    background-size: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.forwards, .midfielders, .defenders {
+    display: flex;
+    justify-content: space-around;
+    margin: 80px;
+    margin-bottom: 0;
+}
+
+#goalkeeper.position {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    margin: 0 auto;
+    margin-block: 30px;
+}
+
+.position {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+
+}
+
+    .position label {
+        display: block;
+        text-align: center;
+
+        font-weight: bold;
+        color: #333;
+
+        background-color: #f7f7f7;
+        border-bottom: 1px solid #ccc;
+    }
+
+.position-slot {
+    text-align: center;
+    background-color: #e0e0e0;
+    color: black;
+    cursor: pointer;
+}
+
+    .position-slot span {
+        display: inline-block;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        padding: 2px;
+        transition: background-color 0.3s;
+    }
+
+    .position-slot:hover span {
+        background-color: #0056b3;
+    }
+
+.position-select {
+    display: none;
+}

@@ -23,8 +23,13 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
+                            <a class="nav-link text-white fw-semibold" asp-area="" asp-controller="DreamTeam" asp-action="Index">Dream Team</a>
+                        </li>
+                        <li class="mt-2 text-white">|</li>
+                        <li class="nav-item">
                             <a class="nav-link text-white fw-semibold" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <li class="mt-2 text-white">|</li>
                         <li class="nav-item">
                             <a class="nav-link text-white fw-semibold" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -57,6 +62,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0/dist/html2canvas.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

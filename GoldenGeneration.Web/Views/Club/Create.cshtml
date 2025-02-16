@@ -1,68 +1,77 @@
 ﻿@model GoldenGeneration.Web.Models.Clubs.ClubFormModel
-<form asp-action="Create" method="post">
-    <div>
-        <label asp-for="Name"></label>
-        <input class="form-control" asp-for="Name" />
-        <span class="small text-danger" asp-validation-for="Name"></span>
+<h1 class="m-auto mt-3 text-center" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Create Club</h1>
+<form asp-action="Create" method="post" class="mt-4 bg-dark text-light p-4 rounded">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="Name" class="form-label text-light"></label>
+            <input class="form-control bg-secondary text-light" asp-for="Name" />
+            <span class="small text-danger" asp-validation-for="Name"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="Stadium" class="form-label text-light"></label>
+            <input class="form-control bg-secondary text-light" asp-for="Stadium" />
+            <span class="small text-danger" asp-validation-for="Stadium"></span>
+        </div>
     </div>
-    <div>
-        <label asp-for="Stadium"></label>
-        <input class="form-control" asp-for="Stadium" />
-        <span class="small text-danger" asp-validation-for="Stadium"></span>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="ChampionsLeagueTitlesCount" class="form-label text-light"></label>
+            <input class="form-control bg-secondary text-light" asp-for="ChampionsLeagueTitlesCount" />
+            <span class="small text-danger" asp-validation-for="ChampionsLeagueTitlesCount"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="LeagueWinnerTitlesCount" class="form-label text-light"></label>
+            <input class="form-control bg-secondary text-light" asp-for="LeagueWinnerTitlesCount" />
+            <span class="small text-danger" asp-validation-for="LeagueWinnerTitlesCount"></span>
+        </div>
     </div>
-    <div>
-        <label asp-for="ChampionsLeagueTitlesCount"></label>
-        <input class="form-control" asp-for="ChampionsLeagueTitlesCount" />
-        <span class="small text-danger" asp-validation-for="ChampionsLeagueTitlesCount"></span>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="LeagueId" class="form-label text-light"></label>
+            <select class="form-select bg-secondary text-light" asp-for="LeagueId">
+                <option value="@string.Empty">Choose club's league</option>
+                @foreach (var league in Model.Leagues)
+                {
+                    <option value="@league.Id">@league.Name</option>
+                }
+            </select>
+            <span class="small text-danger" asp-validation-for="LeagueId"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="ManagerId" class="form-label text-light"></label>
+            <select class="form-select bg-secondary text-light" asp-for="ManagerId">
+                <option value="0">Choose club's manager</option>
+                @foreach (var manager in Model.Managers)
+                {
+                    <option value="@manager.Id">@manager.FirstName @manager.LastName</option>
+                }
+            </select>
+            <span class="small text-danger" asp-validation-for="ManagerId"></span>
+        </div>
     </div>
-    <div>
-        <label asp-for="LeagueWinnerTitlesCount"></label>
-        <input class="form-control" asp-for="LeagueWinnerTitlesCount" />
-        <span class="small text-danger" asp-validation-for="LeagueWinnerTitlesCount"></span>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="KitId" class="form-label text-light"></label>
+            <select class="form-select bg-secondary text-light" asp-for="KitId">
+                <option value="0">Choose club's kit</option>
+                @foreach (var kit in Model.Kits)
+                {
+                    <option value="@kit.Id">@kit.PrimaryColor/@kit.SecondaryColor</option>
+                }
+            </select>
+            <span class="small text-danger" asp-validation-for="KitId"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="ImageUrl" class="form-label text-light"></label>
+            <input class="form-control bg-secondary text-light" asp-for="ImageUrl" />
+            <span class="small text-danger" asp-validation-for="ImageUrl"></span>
+        </div>
     </div>
-    <div>
-        <label asp-for="LeagueId"></label>
-        <select class="form-select" asp-for="LeagueId">
-            <option value="@string.Empty">Choose club's league</option>
-            @foreach (var league in Model.Leagues)
-            {
-                <option value="@league.Id">@league.Name</option>
-            }
-        </select>
-        <span class="small text-danger" asp-validation-for="LeagueId"></span>
-    </div>
-    <div>
-        <label asp-for="ManagerId"></label>
-        <select class="form-select" asp-for="ManagerId">
-            <option value="0">Choose club's manager</option>
-            @foreach (var manager in Model.Managers)
-            {
-                <option value="@manager.Id">@manager.FirstName @manager.LastName</option>
-            }
-        </select>
-        <span class="small text-danger" asp-validation-for="ManagerId"></span>
-    </div>
-    <div>
-        <label asp-for="KitId"></label>
-        <select class="form-select" asp-for="KitId">
-            <option value="0">Choose club's kit</option>
-            @foreach (var kit in Model.Kits)
-            {
-                <option value="@kit.Id">@kit.PrimaryColor/@kit.SecondaryColor</option>
-            }
-        </select>
-        <span class="small text-danger" asp-validation-for="ManagerId"></span>
-    </div>
-    <div>
-        <label asp-for="ImageUrl"></label>
-        <input class="form-control" asp-for="ImageUrl" />
-        <span class="small text-danger" asp-validation-for="ImageUrl"></span>
-    </div>
-    <div class="d-flex justify-content-center">
-        <button class="btn btn-primary btn-lg m-auto" type="submit">Create</button>
+    <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-primary btn-lg" type="submit">Create</button>
     </div>
 </form>
 
-@section Scripts{
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

@@ -1,7 +1,6 @@
 ﻿using GoldenGeneration.Services.Interfaces;
 using GoldenGeneration.Web.Mappers;
 using GoldenGeneration.Web.Models.Footballers;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static GoldenGeneration.Infrastructure.Constants;

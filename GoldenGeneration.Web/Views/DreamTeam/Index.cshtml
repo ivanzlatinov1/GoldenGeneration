@@ -1,0 +1,192 @@
+﻿@model GoldenGeneration.Web.Models.DreamTeam.DreamTeamViewModel
+
+@{
+    ViewData["Title"] = "Create Your Dream Team";
+}
+
+<h2>Create Your Dream Team</h2>
+
+<div class="dream-team-container">
+    <form asp-action="CreateDreamTeam" method="post">
+        <div class="team-positions">
+            <!-- Row 4: Forwards -->
+            <div class="forwards">
+                <div class="position" id="forward1">
+                    <label for="forward1-select">LW</label>
+                    <div class="position-slot" id="forward1-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="forward1-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Forward"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+                <div class="position" id="forward2">
+                    <label for="forward2-select">ST</label>
+                    <div class="position-slot" id="forward2-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="forward2-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Forward"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+                <div class="position" id="forward3">
+                    <label for="forward3-select">RW</label>
+                    <div class="position-slot" id="forward3-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="forward3-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Forward"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <!-- Row 3: Midfielders -->
+            <div class="midfielders">
+                <div class="position" id="midfielder1">
+                    <label for="midfielder1-select">CM</label>
+                    <div class="position-slot" id="midfielder1-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="midfielder1-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Midfielder"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+                <div class="position" id="midfielder2">
+                    <label for="midfielder2-select">CM</label>
+                    <div class="position-slot" id="midfielder2-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="midfielder2-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Midfielder"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+                <div class="position" id="midfielder3">
+                    <label for="midfielder3-select">CM</label>
+                    <div class="position-slot" id="midfielder3-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="midfielder3-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Midfielder"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <!-- Row 2: Defenders -->
+            <div class="defenders">
+                <div class="position" id="defender1">
+                    <label for="defender1-select">LB</label>
+                    <div class="position-slot" id="defender1-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="defender1-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Defender"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+                <div class="position" id="defender2">
+                    <label for="defender2-select">CB</label>
+                    <div class="position-slot" id="defender2-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="defender2-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Defender"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+                <div class="position" id="defender3">
+                    <label for="defender3-select">CB</label>
+                    <div class="position-slot" id="defender3-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="defender3-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Defender"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+                <div class="position" id="defender4">
+                    <label for="defender4-select">RB</label>
+                    <div class="position-slot" id="defender4-slot">
+                        <span>Select Player</span>
+                    </div>
+                    <select class="position-select" id="defender4-select" name="SelectedFootballers" style="display: none;">
+                        @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Defender"))
+                        {
+                            <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <!-- Row 1: Goalkeeper -->
+            <div class="position" id="goalkeeper">
+                <label for="goalkeeper-select">GK</label>
+                <div class="position-slot" id="goalkeeper-slot">
+                    <span>Select Player</span>
+                </div>
+                <select class="position-select" id="goalkeeper-select" name="SelectedFootballers" style="display: none;">
+                    @foreach (var footballer in Model.AllFootballers.Where(f => f.Position.Name == "Goalkeeper"))
+                    {
+                        <option value="@footballer.Id">@footballer.FirstName @footballer.LastName</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="button" class="btn btn-primary" id="save-as-image">Save as Image</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.querySelectorAll('.position-slot').forEach(function (slot) {
+        slot.addEventListener('click', function () {
+            const selectBox = slot.nextElementSibling;
+            const isVisible = selectBox.style.display === 'block';
+            selectBox.style.display = isVisible ? 'none' : 'block';
+        });
+    });
+
+    document.querySelectorAll('.position-select').forEach(function (select) {
+        select.addEventListener('change', function () {
+            const selectedOption = select.options[select.selectedIndex];
+            const slot = select.previousElementSibling;
+
+            slot.innerHTML = selectedOption.text;
+            select.style.display = 'none';
+        });
+    });
+
+        document.getElementById('save-as-image').addEventListener('click', function () {
+        const formContainer = document.querySelector('.dream-team-container');
+
+        html2canvas(formContainer).then(function (canvas) {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'dream-team.png';
+            link.click();
+        });
+    });
+
+</script>
