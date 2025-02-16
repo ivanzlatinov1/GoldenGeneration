@@ -1,5 +1,7 @@
 ﻿using GoldenGeneration.Infrastructure;
 using GoldenGeneration.Infrastructure.Entities;
+using GoldenGeneration.Infrastructure.Repositories.Readers;
+using GoldenGeneration.Infrastructure.Repositories;
 using GoldenGeneration.Services.Interfaces;
 using GoldenGeneration.Services.Mappers;
 using GoldenGeneration.Services.Models;
@@ -7,11 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoldenGeneration.Services.Implementations
 {
-    public class PositionService(GoldenGenerationDbContext context) : IPositionService
+    public class PositionService(UnitOfWork unitOfWork, Writes<Position> writes,
+        PositionReads reads) : IPositionService
     {
         public async Task<PositionModel[]> GetAllAsync()
         {
-            Position[] positions = await context.Positions.ToArrayAsync();
+            Position[] positions = await reads.AllAsync();
             return [.. positions.Select(x => x.ToModel())];
         }
 
@@ -23,20 +26,20 @@ namespace GoldenGeneration.Services.Implementations
 
         public async Task<int> AddAsync(PositionModel position)
         {
-            var entry = await context.Positions.AddAsync(position.ToEntity());
-            Position entity = entry.Entity;
-            await context.SaveChangesAsync();
+            var entity = await writes.AddAsync(position.ToEntity());
+            await unitOfWork.SaveChangesAsync();
             return entity.Id;
         }
 
         public async Task RemoveAsync(int id)
         {
             var position = await GetPositionById(id);
-            context.Remove(position);
+            writes.Remove(position);
+            await unitOfWork.SaveChangesAsync();
         }
 
         private async Task<Position> GetPositionById(int id)
-            => await context.Positions.FirstOrDefaultAsync(x => x.Id == id)
+            => await reads.SingleByIdAsync(id)
                ?? throw new KeyNotFoundException($"Position with id: {id} is not found.");
     }
 }

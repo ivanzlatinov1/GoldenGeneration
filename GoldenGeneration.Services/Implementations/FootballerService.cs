@@ -1,20 +1,18 @@
-﻿using GoldenGeneration.Infrastructure;
-using GoldenGeneration.Infrastructure.Entities;
+﻿using GoldenGeneration.Infrastructure.Entities;
+using GoldenGeneration.Infrastructure.Repositories;
+using GoldenGeneration.Infrastructure.Repositories.Readers;
 using GoldenGeneration.Services.Interfaces;
 using GoldenGeneration.Services.Mappers;
 using GoldenGeneration.Services.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace GoldenGeneration.Services.Implementations
 {
-    public class FootballerService(GoldenGenerationDbContext context) : IFootballerService
+    public class FootballerService(UnitOfWork unitOfWork, Writes<Footballer> writes,
+        FootballerReads reads) : IFootballerService
     {
         public async Task<FootballerModel[]> GetAllAsync()
         {
-            Footballer[] footballers = await context.Footballers
-                .Include(x => x.Position)
-                .Include(x => x.Club)
-                .ToArrayAsync();
+            Footballer[] footballers = await reads.AllAsync();
 
             return [.. footballers.Select(x => x.ToModel())];
         }
@@ -27,23 +25,20 @@ namespace GoldenGeneration.Services.Implementations
 
         public async Task<string> AddAsync(FootballerModel footballer)
         {
-            var entry = await context.Footballers.AddAsync(footballer.ToEntity());
-            Footballer entity = entry.Entity;
-            await context.SaveChangesAsync();
+            var entity = await writes.AddAsync(footballer.ToEntity());
+            await unitOfWork.SaveChangesAsync();
             return entity.Id;
         }
 
         public async Task RemoveAsync(string id)
         {
             var footballer = await GetFootballerById(id);
-            context.Remove(footballer);
+            writes.Remove(footballer);
+            await unitOfWork.SaveChangesAsync();
         }
 
         private async Task<Footballer> GetFootballerById(string id)
-            => await context.Footballers
-                   .Include(x => x.Position)
-                   .Include(x => x.Club)
-                   .FirstOrDefaultAsync(x => x.Id == id)
+            => await reads.SingleByIdAsync(id)
                     ?? throw new KeyNotFoundException($"Footballer with id: {id} is not found.");
     }
 }

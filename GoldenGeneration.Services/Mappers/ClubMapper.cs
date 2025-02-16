@@ -23,7 +23,7 @@ namespace GoldenGeneration.Services.Mappers
                 ManagerClubs = entity.ManagerClubs
             };
 
-        public static Club ToEntity(this ClubModel model, bool firstTime = true)
+        public static Club ToEntity(this ClubModel model)
             => new()
             {
                 Id = model.Id,
@@ -35,9 +35,9 @@ namespace GoldenGeneration.Services.Mappers
                 ChampionsLeagueTitlesCount = model.ChampionsLeagueTitlesCount,
                 LeagueWinnerTitlesCount = model.LeagueWinnerTitlesCount,
                 KitId = model.KitId,
-                Kit = firstTime ? model.Kit.ToEntity(false) : null!,
-                Manager = firstTime ? model.Manager.ToEntity(false) : null!,
-                League = firstTime ? model.League.ToEntity(false) : null!,
+                Kit = null!,
+                Manager = null!,
+                League = null!,
                 ManagerClubs = model.ManagerClubs
             };
     }

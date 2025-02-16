@@ -1,5 +1,6 @@
-﻿using GoldenGeneration.Infrastructure;
-using GoldenGeneration.Infrastructure.Entities;
+﻿using GoldenGeneration.Infrastructure.Entities;
+using GoldenGeneration.Infrastructure.Repositories;
+using GoldenGeneration.Infrastructure.Repositories.Readers;
 using GoldenGeneration.Services.Interfaces;
 using GoldenGeneration.Services.Mappers;
 using GoldenGeneration.Services.Models;
@@ -7,15 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoldenGeneration.Services.Implementations
 {
-    public class ClubService(GoldenGenerationDbContext context) : IClubService
+    public class ClubService(UnitOfWork unitOfWork, Writes<Club> writes,
+        ClubReads reads) : IClubService
     {
         public async Task<ClubModel[]> GetAllAsync()
         {
-            Club[] clubs = await context.Clubs
-                .Include(x => x.Kit)
-                .Include(x => x.Manager)
-                .Include(x => x.League)
-                .ToArrayAsync();
+            Club[] clubs = await reads.AllAsync();
 
             return [.. clubs.Select(x => x.ToModel())];
         }
@@ -28,24 +26,20 @@ namespace GoldenGeneration.Services.Implementations
 
         public async Task<string> AddAsync(ClubModel club)
         {
-            var entry = await context.Clubs.AddAsync(club.ToEntity());
-            Club entity = entry.Entity;
-            await context.SaveChangesAsync();
+            var entity = await writes.AddAsync(club.ToEntity());
+            await unitOfWork.SaveChangesAsync();
             return entity.Id;
         }
 
         public async Task RemoveAsync(string id)
         {
             var club = await GetClubById(id);
-            context.Remove(club);
+            writes.Remove(club);
+            await unitOfWork.SaveChangesAsync();
         }
 
         private async Task<Club> GetClubById(string id)
-            => await context.Clubs
-                   .Include(x => x.Kit)
-                   .Include(x => x.Manager)
-                   .Include(x => x.League)
-                   .FirstOrDefaultAsync(x => x.Id == id)
+            => await reads.SingleByIdAsync(id)
                ?? throw new KeyNotFoundException($"Club with id: {id} is not found.");
     }
 }

@@ -1,5 +1,7 @@
 ﻿using GoldenGeneration.Infrastructure;
 using GoldenGeneration.Infrastructure.Entities;
+using GoldenGeneration.Infrastructure.Repositories.Readers;
+using GoldenGeneration.Infrastructure.Repositories;
 using GoldenGeneration.Services.Interfaces;
 using GoldenGeneration.Services.Mappers;
 using GoldenGeneration.Services.Models;
@@ -7,11 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoldenGeneration.Services.Implementations
 {
-    public class KitService(GoldenGenerationDbContext context) : IKitService
+    public class KitService(UnitOfWork unitOfWork, Writes<Kit> writes,
+        KitReads reads) : IKitService
     {
         public async Task<KitModel[]> GetAllAsync()
         {
-            Kit[] kits = await context.Kits.ToArrayAsync();
+            Kit[] kits = await reads.AllAsync();
             return [.. kits.Select(x => x.ToModel())];
         }
 
@@ -23,20 +26,20 @@ namespace GoldenGeneration.Services.Implementations
 
         public async Task<int> AddAsync(KitModel kit)
         {
-            var entry = await context.Kits.AddAsync(kit.ToEntity());
-            Kit entity = entry.Entity;
-            await context.SaveChangesAsync();
+            var entity = await writes.AddAsync(kit.ToEntity());
+            await unitOfWork.SaveChangesAsync();
             return entity.Id;
         }
 
         public async Task RemoveAsync(int id)
         {
             var kit = await GetKitById(id);
-            context.Remove(kit);
+            writes.Remove(kit);
+            await unitOfWork.SaveChangesAsync();
         }
 
         private async Task<Kit> GetKitById(int id)
-            => await context.Kits.FirstOrDefaultAsync(x => x.Id == id)
+            => await reads.SingleByIdAsync(id)
                ?? throw new KeyNotFoundException($"Kit with id: {id} is not found.");
     }
 }

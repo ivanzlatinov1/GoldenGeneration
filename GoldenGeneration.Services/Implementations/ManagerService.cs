@@ -1,5 +1,7 @@
 ﻿using GoldenGeneration.Infrastructure;
 using GoldenGeneration.Infrastructure.Entities;
+using GoldenGeneration.Infrastructure.Repositories.Readers;
+using GoldenGeneration.Infrastructure.Repositories;
 using GoldenGeneration.Services.Interfaces;
 using GoldenGeneration.Services.Mappers;
 using GoldenGeneration.Services.Models;
@@ -7,11 +9,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GoldenGeneration.Services.Implementations
 {
-    public class ManagerService(GoldenGenerationDbContext context) : IManagerService
+    public class ManagerService(UnitOfWork unitOfWork, Writes<Manager> writes,
+        ManagerReads reads) : IManagerService
     {
         public async Task<ManagerModel[]> GetAllAsync()
         {
-            Manager[] managers = await context.Managers.ToArrayAsync();
+            Manager[] managers = await reads.AllAsync();
             return [.. managers.Select(x => x.ToModel())];
         }
 
@@ -23,20 +26,20 @@ namespace GoldenGeneration.Services.Implementations
 
         public async Task<string> AddAsync(ManagerModel manager)
         {
-            var entry = await context.Managers.AddAsync(manager.ToEntity());
-            Manager entity = entry.Entity;
-            await context.SaveChangesAsync();
+            var entity = await writes.AddAsync(manager.ToEntity());
+            await unitOfWork.SaveChangesAsync();
             return entity.Id;
         }
 
         public async Task RemoveAsync(string id)
         {
             var manager = await GetManagerById(id);
-            context.Remove(manager);
+            writes.Remove(manager);
+            await unitOfWork.SaveChangesAsync();
         }
 
         private async Task<Manager> GetManagerById(string id)
-            => await context.Managers.FirstOrDefaultAsync(x => x.Id == id)
+            => await reads.SingleByIdAsync(id)
                ?? throw new KeyNotFoundException($"Manager with id: {id} is not found.");
     }
 }
